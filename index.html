@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Movie Recommendations</h1>
+        </header>
+        
+        <main>
+            <section class="form-section">
+                <h2>Share Your Recommendation</h2>
+                <form id="recommendationForm">
+                    <input type="text" id="movieTitle" placeholder="Movie Title" required>
+                    <input type="url" id="movieLink" placeholder="Movie Link" required>
+                    <textarea id="movieOpinion" placeholder="Write your opinion (Max 500 words)" maxlength="500" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+            
+            <section class="recommendations-section">
+                <h2>Recommendations</h2>
+                <ul id="recommendationsList"></ul>
+            </section>
+            
+            <section class="top-trending-section">
+                <h2>Top Trending</h2>
+                <ul id="topTrendingList"></ul>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
