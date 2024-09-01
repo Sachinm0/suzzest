@@ -83,28 +83,6 @@ form button:hover {
     text-decoration: underline;
 }
 
-.recommendations-section .share-buttons {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.recommendations-section .share-buttons button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.recommendations-section .share-buttons img {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-}
-
-.recommendations-section .share-buttons img:hover {
-    transform: scale(1.1);
-}
-
 @media (max-width: 600px) {
     .container {
         padding: 15px;

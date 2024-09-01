@@ -5,7 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const movieOpinionInput = document.getElementById('movieOpinion');
     const recommendationsList = document.getElementById('recommendationsList');
     const topTrendingList = document.getElementById('topTrendingList');
-    const recommendations = [];
+    let recommendations = JSON.parse(localStorage.getItem('recommendations')) || [];
+
+    // Initialize the list with saved recommendations
+    recommendations.forEach(rec => {
+        addRecommendation(rec.title, rec.link, rec.opinion);
+    });
+    updateTopTrending();
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -15,8 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const movieOpinion = movieOpinionInput.value;
 
         if (movieTitle && movieLink && movieOpinion) {
+            const newRecommendation = { title: movieTitle, link: movieLink, opinion: movieOpinion };
+            recommendations.push(newRecommendation);
+            localStorage.setItem('recommendations', JSON.stringify(recommendations));
+
             addRecommendation(movieTitle, movieLink, movieOpinion);
-            recommendations.push({ title: movieTitle, link: movieLink, opinion: movieOpinion });
             updateTopTrending();
             
             // Clear the form
@@ -31,17 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         listItem.innerHTML = `
             <strong>${title}</strong>: <a href="${link}" target="_blank">${link}</a>
             <p>${opinion}</p>
-            <div class="share-buttons">
-                <button onclick="shareOnFacebook('${title}', '${link}')">
-                    <img src="facebook-icon.png" alt="Share on Facebook">
-                </button>
-                <button onclick="shareOnTwitter('${title}', '${link}')">
-                    <img src="twitter-icon.png" alt="Share on Twitter">
-                </button>
-                <button onclick="copyToClipboard('${title}', '${link}')">
-                    <img src="copy-icon.png" alt="Copy Link">
-                </button>
-            </div>
         `;
         recommendationsList.appendChild(listItem);
     }
@@ -58,23 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${rec.opinion}</p>
             `;
             topTrendingList.appendChild(listItem);
-        });
-    }
-
-    window.shareOnFacebook = function(title, link) {
-        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}&quote=${encodeURIComponent(title)}`;
-        window.open(url, '_blank');
-    }
-
-    window.shareOnTwitter = function(title, link) {
-        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}%20${encodeURIComponent(link)}`;
-        window.open(url, '_blank');
-    }
-
-    window.copyToClipboard = function(title, link) {
-        const textToCopy = `${title}: ${link}`;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            alert('Link copied to clipboard!');
         });
     }
 });
