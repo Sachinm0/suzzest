@@ -3,34 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Recommendations</title>
+    <title>Suzest.me</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Movie Recommendations</h1>
+            <h1>Suzest.me</h1>
         </header>
         
         <main>
             <section class="form-section">
-                <h2>Share Your Recommendation</h2>
+                <h2>Your Recommendation</h2>
                 <form id="recommendationForm">
-                    <input type="text" id="movieTitle" placeholder="Movie Title" required>
-                    <input type="url" id="movieLink" placeholder="Movie Link" required>
-                    <textarea id="movieOpinion" placeholder="Write your opinion (Max 500 words)" maxlength="500" required></textarea>
+                    <input type="text" id="movieTitle" placeholder="Title" required>
+                    <input type="url" id="Link" placeholder="Link" required>
+                    <textarea id="YourOpinion" placeholder="Write your opinion (Max 500 words)" maxlength="500" required></textarea>
                     <button type="submit">Submit</button>
                 </form>
             </section>
             
-            <section class="recommendations-section">
-                <h2>Recommendations</h2>
+            <section class="toprecommendations-section">
+                <h2>Top Recommendations</h2>
                 <ul id="recommendationsList"></ul>
-            </section>
-            
-            <section class="top-trending-section">
-                <h2>Top Trending</h2>
-                <ul id="topTrendingList"></ul>
             </section>
         </main>
     </div>
