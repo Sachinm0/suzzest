@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('recommendationForm');
-    const movieTitleInput = document.getElementById('movieTitle');
-    const movieLinkInput = document.getElementById('movieLink');
-    const movieOpinionInput = document.getElementById('movieOpinion');
+    const TitleInput = document.getElementById('Title');
+    const LinkInput = document.getElementById('Link');
+    const OpinionInput = document.getElementById('Opinion');
     const recommendationsList = document.getElementById('recommendationsList');
     const topTrendingList = document.getElementById('topTrendingList');
     let recommendations = JSON.parse(localStorage.getItem('recommendations')) || [];
@@ -16,22 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const movieTitle = movieTitleInput.value;
-        const movieLink = movieLinkInput.value;
-        const movieOpinion = movieOpinionInput.value;
+        const Title = TitleInput.value;
+        const Link = LinkInput.value;
+        const Opinion = OpinionInput.value;
 
-        if (movieTitle && movieLink && movieOpinion) {
-            const newRecommendation = { title: movieTitle, link: movieLink, opinion: movieOpinion };
+        if (Title && Link && Opinion) {
+            const newRecommendation = { title: Title, link: Link, opinion: Opinion };
             recommendations.push(newRecommendation);
             localStorage.setItem('recommendations', JSON.stringify(recommendations));
 
-            addRecommendation(movieTitle, movieLink, movieOpinion);
+            addRecommendation(Title, Link, Opinion);
             updateTopTrending();
             
             // Clear the form
-            movieTitleInput.value = '';
-            movieLinkInput.value = '';
-            movieOpinionInput.value = '';
+            TitleInput.value = '';
+            LinkInput.value = '';
+            OpinionInput.value = '';
         }
     });
 
