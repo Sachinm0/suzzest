@@ -22,9 +22,9 @@ function searchGoogle(query) {
     // Construct the URL for Google search
     const googleSearchUrl = `https://www.google.com/search?q=${encodedQuery}`;
 
-    var newWindow = window.open('', 'googleSearchUrl');
+  
     // Redirect the user to the Google search page
-  //  Window.location.href = googleSearchUrl;
+    newWindow.location.href = googleSearchUrl;
 }
 
 
