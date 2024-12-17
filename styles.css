@@ -8,8 +8,7 @@ body {
 }
 .searchtext{
     width: 120%;
-    margin: 100px;
-    padding: 100px;
+    height: 30%;
 }
 .container {
     width: 90%;
