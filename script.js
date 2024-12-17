@@ -15,6 +15,18 @@ const movies = [
 const movieList = document.getElementById("movie-list");
 
 // Render movies
+function searchGoogle(query) {
+    // URL encode the query to ensure it works in a URL
+    const encodedQuery = encodeURIComponent(query);
+
+    // Construct the URL for Google search
+    const googleSearchUrl = `https://www.google.com/search?q=${encodedQuery}`;
+
+    // Redirect the user to the Google search page
+    window.location.href = googleSearchUrl;
+}
+
+
 function renderMovies() {
     movieList.innerHTML = ""; // Clear previous list
     movies
