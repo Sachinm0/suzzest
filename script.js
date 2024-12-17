@@ -22,8 +22,6 @@ function searchGoogle(query) {
     // Construct the URL for Google search
     const googleSearchUrl = `https://www.google.com/search?q=${encodedQuery}`;
 
-  
-    // Redirect the user to the Google search page
     window.location.href = googleSearchUrl;
 }
 
