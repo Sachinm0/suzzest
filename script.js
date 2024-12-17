@@ -24,7 +24,7 @@ function searchGoogle(query) {
 
   
     // Redirect the user to the Google search page
-    newWindow.location.href = googleSearchUrl;
+    window.location.href = googleSearchUrl;
 }
 
 
