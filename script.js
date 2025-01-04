@@ -16,3 +16,9 @@ setInterval(function () {
                 window.location.href = googleSearchUrl;
             }
         });
+
+document.getElementById("search-input").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                document.getElementById("search-button").click();
+            }
+        });
