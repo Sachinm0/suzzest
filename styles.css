@@ -1,6 +1,40 @@
-body{
-  padding: 25px;
-}
+ body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        #search-input {
+            border: none;
+            padding: 10px;
+            outline: none;
+            flex: 1;
+        }
+
+        #search-button {
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        #search-button:hover {
+            background-color: #357ae8;
+        }
 .title {
 	color: #5C6AC4;
 }
