@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptocurrency Mining Game</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+    .balance {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .puzzle {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .option {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ffcc00;
+      border-radius: 5px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: background 0.3s ease;
+    }
+    .option:hover {
+      background: rgba(255, 204, 0, 0.2);
+    }
+    .timer {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: #ffcc00;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #ffcc00;
+      color: #1e3c72;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #ffdd33;
+    }
+    .greeting {
+      font-size: 1.5rem;
+      color: #ffcc00;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cryptocurrency Mining Game</h1>
+    <p class="balance">Your Balance: <span id="balance">0</span> <span id="crypto">BTC</span></p>
+    <label for="crypto-select">Choose Cryptocurrency:</label>
+    <select id="crypto-select">
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="LTC">Litecoin (LTC)</option>
+    </select>
+    <div class="puzzle" id="puzzle"></div>
+    <div class="options" id="options"></div>
+    <div class="timer">Time Left: <span id="timer">120</span> seconds</div>
+    <div class="greeting" id="greeting"></div>
+    <button onclick="startGame()">Start Mining</button>
+  </div>
+
+  <script>
+    let balance = 0;
+    let difficulty = 1;
+    let currentCrypto = "BTC";
+    let wins = 0;
+    let timeLimit = 120; // Start with 2 minutes
+    let timerInterval;
+    let currentPuzzle;
+
+    // List of puzzles (math and logical)
+    const puzzles = [
+      { question: "What is 5 + 7?", answer: "12", options: ["10", "12", "14", "16"] },
+      { question: "What is the capital of France?", answer: "Paris", options: ["London", "Paris", "Berlin", "Madrid"] },
+      { question: "Which planet is known as the Red Planet?", answer: "Mars", options: ["Venus", "Mars", "Jupiter", "Saturn"] },
+      { question: "What is 8 * 3?", answer: "24", options: ["18", "20", "22", "24"] },
+      { question: "Who wrote 'Romeo and Juliet'?", answer: "Shakespeare", options: ["Shakespeare", "Hemingway", "Tolstoy", "Austen"] },
+      { question: "What is the square root of 64?", answer: "8", options: ["6", "7", "8", "9"] },
+    ];
+
+    // Generate a random puzzle
+    function generatePuzzle() {
+      const randomIndex = Math.floor(Math.random() * puzzles.length);
+      currentPuzzle = puzzles[randomIndex];
+      document.getElementById('puzzle').textContent = currentPuzzle.question;
+      const optionsHtml = currentPuzzle.options.map(option => `<div class="option" onclick="checkAnswer('${option}')">${option}</div>`).join('');
+      document.getElementById('options').innerHTML = optionsHtml;
+    }
+
+    // Check the player's answer
+    function checkAnswer(selectedAnswer) {
+      clearInterval(timerInterval); // Stop the timer
+      if (selectedAnswer === currentPuzzle.answer) {
+        const reward = (Math.random() * (0.01 * difficulty)).toFixed(5);
+        balance += parseFloat(reward);
+        document.getElementById('balance').textContent = balance.toFixed(5);
+        wins++;
+        if (wins % 3 === 0) {
+          document.getElementById('greeting').textContent = `Congratulations! You've solved ${wins} puzzles!`;
+        }
+        alert(`Correct! You mined ${reward} ${currentCrypto}!`);
+        difficulty += 1; // Increase difficulty
+        timeLimit = Math.max(3, timeLimit - 10); // Decrease time limit (minimum 3 seconds)
+      } else {
+        alert(`Wrong answer! Try again.`);
+      }
+      startGame(); // Start a new puzzle
+    }
+
+    // Start the game
+    function startGame() {
+      generatePuzzle();
+      startTimer();
+    }
+
+    // Timer function
+    function startTimer() {
+      let timeLeft = timeLimit;
+      document.getElementById('timer').textContent = timeLeft;
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert("Time's up! Try again.");
+          startGame(); // Restart the game
+        }
+      }, 1000);
+    }
+
+    // Change cryptocurrency
+    document.getElementById('crypto-select').addEventListener('change', (e) => {
+      currentCrypto = e.target.value;
+      document.getElementById('crypto').textContent = currentCrypto;
+    });
+
+    // Initialize the game
+    startGame();
+  </script>
+</body>
+</html>
